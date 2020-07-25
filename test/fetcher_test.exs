@@ -5,7 +5,7 @@ defmodule FetcherTest do
   @url "https://gorka.io/about/"
 
   test "accepts strings as input" do
-    assert Fetcher.fetch(@url) == :woops
+    assert Fetcher.fetch(@url) == :ok
   end
 
   test "Rejects invalid URLs" do
