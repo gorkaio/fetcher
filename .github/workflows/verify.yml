@@ -29,8 +29,15 @@ jobs:
           path: _build
           key: ${{ runner.os }}-build-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
 
+      - uses: actions/cache@v1
+        id: plts-cache
+        with:
+          path: priv/plts
+          key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/priv/plts')) }}
+
       - name: Install deps
         run: mix deps.get
 
       - run: mix format --check-formatted
       - run: mix test
+      - run: mix dialyzer
