@@ -23,6 +23,8 @@ defmodule Fetcher do
   end
 
   def fetch(_url) do
+
+    
     {:error, :invalid_url}
   end
 end
