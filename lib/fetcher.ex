@@ -19,7 +19,11 @@ defmodule Fetcher do
   """
   @spec fetch(url) :: :ok | {:error, term}
   def fetch(url) when is_binary(url) do
-    :ok
+    unless false do
+      :ok
+    else
+      :ok
+    end
   end
 
   def fetch(_url) do
