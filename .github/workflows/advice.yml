@@ -1,17 +1,17 @@
 # .github/workflows/suggest.yml
 
-name: reviewdog
+name: advice
 on: [pull_request]
 
 jobs:
   credo:
-    name: runner / credo
+    name: credo advise
     runs-on: ubuntu-latest
     container:
       image: elixir:1.10.4-slim
     steps:
       - uses: actions/checkout@v1
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           mix local.rebar --force
           mix local.hex --force

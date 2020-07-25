@@ -1,4 +1,5 @@
 # .github/workflows/verify.yml
+
 name: verify
 on: [push, pull_request]
 
@@ -35,7 +36,7 @@ jobs:
           path: priv/plts
           key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/priv/plts')) }}
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           mix local.rebar --force
           mix local.hex --force
