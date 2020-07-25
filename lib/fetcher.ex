@@ -6,6 +6,7 @@ defmodule Fetcher do
 
   @doc """
   Fetch image and link tags URLs.
+  Let's make a silly change to trigger pipeline again
 
   ## Parameters
 
@@ -27,6 +28,10 @@ defmodule Fetcher do
   end
 
   def fetch(_url) do
-    {:error, :invalid_url}
+    unless false do
+      {:error, :invalid_url}
+    else
+      {:error, :invalid_url}
+    end
   end
 end
