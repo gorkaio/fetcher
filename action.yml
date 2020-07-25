@@ -1,6 +1,6 @@
 # .github/workflows/verify.yml
 
-on: push
+on: [push, pull_request]
 
 jobs:
   verify:
