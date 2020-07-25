@@ -38,6 +38,17 @@ jobs:
       - name: Install deps
         run: mix deps.get
 
-      - run: mix format --check-formatted
-      - run: mix test
-      - run: mix dialyzer
+      - name: Format checker
+        run: mix format --check-formatted
+
+      - name: Test
+        run: mix test
+
+      - name: Static analysis
+        run: mix dialyzer
+
+      - name: Credo advises
+        uses: hauleth/reviewdog-action-credo@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
