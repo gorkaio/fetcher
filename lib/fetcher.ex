@@ -2,7 +2,7 @@ defmodule Fetcher do
   @moduledoc """
   `Fetcher` fetches image and link URLs from a given page URL.
   """
-  @type url() :: integer
+  @type url() :: String.t()
 
   @doc """
   Fetch image and link tags URLs.
@@ -17,12 +17,12 @@ defmodule Fetcher do
       :ok
 
   """
-  @spec fetch(url) :: :ok | {:error, term}
+  @spec fetch(any) :: :ok | {:error, term}
   def fetch(url) when is_binary(url) do
     :ok
   end
 
-  def break() do
-    fetch(5)
+  def fetch(_url) do
+    {:error, :invalid_url}
   end
 end
