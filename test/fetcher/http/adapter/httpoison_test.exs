@@ -22,7 +22,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
       |> URI.to_string()
 
     expected = {:ok, SiteData.new()}
-    actual = Fetcher.fetch(url)
+    actual = Fetcher.fetch(url, http_client: Fetcher.Http.Adapter.Poison)
 
     assert expected == actual
   end
@@ -39,7 +39,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
       |> URI.to_string()
 
     expected = {:ok, SiteData.new() |> SiteData.with_links(links) |> SiteData.with_assets(assets)}
-    actual = Fetcher.fetch(url)
+    actual = Fetcher.fetch(url, http_client: Fetcher.Http.Adapter.Poison)
 
     assert expected == actual
   end
@@ -62,7 +62,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
       |> URI.to_string()
 
     expected = {:ok, SiteData.new() |> SiteData.with_links(links) |> SiteData.with_assets(assets)}
-    actual = Fetcher.fetch(url)
+    actual = Fetcher.fetch(url, http_client: Fetcher.Http.Adapter.Poison)
 
     assert expected == actual
   end
@@ -76,7 +76,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
       |> Map.put(:query, Query.encode(%{status: 404}))
       |> URI.to_string()
 
-    actual = Fetcher.fetch(url)
+    actual = Fetcher.fetch(url, http_client: Fetcher.Http.Adapter.Poison)
 
     assert expected == actual
   end
