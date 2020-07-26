@@ -3,6 +3,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
   use ExUnit.Case, async: true
   doctest Fetcher
   alias Fetcher.SiteData
+  alias Plug.Conn.Query
 
   @base_url "http://localhost:8081/"
   @test_url @base_url <> "test"
@@ -17,7 +18,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
     url =
       @test_url
       |> URI.parse()
-      |> Map.put(:query, Plug.Conn.Query.encode(params))
+      |> Map.put(:query, Query.encode(params))
       |> URI.to_string()
 
     expected = {:ok, SiteData.new()}
@@ -34,7 +35,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
     url =
       @test_url
       |> URI.parse()
-      |> Map.put(:query, Plug.Conn.Query.encode(params))
+      |> Map.put(:query, Query.encode(params))
       |> URI.to_string()
 
     expected = {:ok, SiteData.new() |> SiteData.with_links(links) |> SiteData.with_assets(assets)}
@@ -51,13 +52,13 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
     redirect_to =
       @test_url
       |> URI.parse()
-      |> Map.put(:query, Plug.Conn.Query.encode(params))
+      |> Map.put(:query, Query.encode(params))
       |> URI.to_string()
 
     url =
       @redirect_url
       |> URI.parse()
-      |> Map.put(:query, Plug.Conn.Query.encode(%{page: redirect_to}))
+      |> Map.put(:query, Query.encode(%{page: redirect_to}))
       |> URI.to_string()
 
     expected = {:ok, SiteData.new() |> SiteData.with_links(links) |> SiteData.with_assets(assets)}
@@ -72,7 +73,7 @@ defmodule Fetcher.Http.Adapter.HttpoisonTest do
     url =
       @failure_url
       |> URI.parse()
-      |> Map.put(:query, Plug.Conn.Query.encode(%{status: 404}))
+      |> Map.put(:query, Query.encode(%{status: 404}))
       |> URI.to_string()
 
     actual = Fetcher.fetch(url)
