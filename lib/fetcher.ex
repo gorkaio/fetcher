@@ -2,8 +2,8 @@ defmodule Fetcher do
   @moduledoc """
   Fetches asset and link URLs from a given page URL.
   """
-  alias Fetcher.SiteData
   alias Fetcher.Http.Client, as: HttpClient
+  alias Fetcher.SiteData
 
   @default_http_client Fetcher.Http.Adapter.Poison
 

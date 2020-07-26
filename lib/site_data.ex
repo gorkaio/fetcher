@@ -21,7 +21,7 @@ defmodule Fetcher.SiteData do
 
   """
   @spec new :: Fetcher.SiteData.t()
-  def new() do
+  def new do
     %__MODULE__{links: [], assets: []}
   end
 
