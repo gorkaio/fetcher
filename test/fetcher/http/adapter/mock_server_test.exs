@@ -48,13 +48,13 @@ defmodule Fetcher.Http.Adapter.MockServerTest do
       |> Map.put(:query, Query.encode(%{page: redirect_to}))
       |> URI.to_string()
 
-      {:ok, response} = HTTPoison.get(url)
-      assert response.status_code == 301
+    {:ok, response} = HTTPoison.get(url)
+    assert response.status_code == 301
   end
 
   test "Redirection without location renders failure" do
-      {:ok, response} = HTTPoison.get(@redirect_url)
-      assert response.status_code == 400
+    {:ok, response} = HTTPoison.get(@redirect_url)
+    assert response.status_code == 400
   end
 
   test "Generates failure responses" do
@@ -64,8 +64,7 @@ defmodule Fetcher.Http.Adapter.MockServerTest do
       |> Map.put(:query, Query.encode(%{status: 422}))
       |> URI.to_string()
 
-      {:ok, response} = HTTPoison.get(url)
-      assert response.status_code == 422
+    {:ok, response} = HTTPoison.get(url)
+    assert response.status_code == 422
   end
-
 end
