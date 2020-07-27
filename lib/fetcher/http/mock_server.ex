@@ -23,11 +23,7 @@ defmodule Fetcher.Http.MockServer do
       |> fetch_query_params()
 
     query_params = %{"assets" => [], "links" => []} |> Map.merge(conn.query_params)
-
-    case query_params do
-      %{"assets" => assets, "links" => links} -> success(conn, links, assets)
-      _ -> failure(conn, :bad_request)
-    end
+    success(conn, query_params["links"], query_params["assets"])
   end
 
   get "/failure" do
@@ -37,7 +33,7 @@ defmodule Fetcher.Http.MockServer do
 
     case conn.query_params do
       %{"status" => status} -> failure(conn, status |> String.to_integer())
-      _ -> failure(conn)
+      _ -> failure(conn, :bad_request)
     end
   end
 
@@ -48,7 +44,7 @@ defmodule Fetcher.Http.MockServer do
 
     case conn.query_params do
       %{"page" => page} -> redirect(conn, page)
-      _ -> failure(conn)
+      _ -> failure(conn, :bad_request)
     end
   end
 
@@ -61,23 +57,35 @@ defmodule Fetcher.Http.MockServer do
 
   defp success(conn, links, assets) do
     conn
-    |> Plug.Conn.send_resp(:ok, body(links, assets))
+    |> Plug.Conn.send_resp(:ok, html(links, assets))
   end
 
-  defp failure(conn, status \\ :internal_server_error) do
+  defp failure(conn, status) do
     conn
     |> Plug.Conn.send_resp(status, "")
   end
 
-  defp body(links, assets) do
-    links =
-      Enum.map(links, fn l -> "<li><a href=\"#{l}\">link</a></li>\n" end)
-      |> Enum.join()
+  defp html(links, assets) do
+    links_html =
+      links
+      |> Enum.map(&link(&1))
 
-    assets =
-      Enum.map(assets, fn a -> "<img src=\"#{a}\" />\n" end)
-      |> Enum.join()
+    assets_html =
+      assets
+      |> Enum.map(&image(&1))
 
-    "<html><body><ul>#{links}</ul>#{assets}</body></html>"
+    """
+    <html>
+      <body>#{links_html}#{assets_html}</body>
+    </html>
+    """
+  end
+
+  defp link(url) do
+    "<a href=\"#{url}\">link</a>"
+  end
+
+  defp image(url) do
+    "<img src=\"#{url}\" />"
   end
 end
