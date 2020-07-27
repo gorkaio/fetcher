@@ -14,7 +14,7 @@ defmodule Fetcher do
   Fetch image and link tags URLs.
 
   Available options:
-  
+
     - http_client: HTTP Client to be used. Must comply with `Fetcher.Http.Client` behaviour. Defaults to `Fetcher.Http.Adapter.Poison`.
     - unique: boolean. If set, removes duplicates from results. Defaults to `true`.
 
