@@ -26,7 +26,6 @@ defmodule Fetcher.MixProject do
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
         plt_add_deps: :transitive
       ],
-
       package: package()
     ]
   end
