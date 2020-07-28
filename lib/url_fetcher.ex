@@ -9,7 +9,8 @@ defmodule UrlFetcher do
   @default_opts [
     http_client: UrlFetcher.Http.Adapter.Poison,
     unique: true,
-    normalize: :original
+    normalize: :original,
+    internal_only: false
   ]
 
   @doc """
