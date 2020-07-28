@@ -3,8 +3,8 @@ defmodule UrlFetcher do
   Fetches asset and link URLs from a given page URL.
   """
   alias UrlFetcher.Http.Client, as: HttpClient
-  alias UrlFetcher.SiteData
   alias UrlFetcher.Parser
+  alias UrlFetcher.SiteData
 
   @default_opts [
     http_client: UrlFetcher.Http.Adapter.Poison,
