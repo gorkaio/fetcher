@@ -5,6 +5,7 @@ on: [pull_request]
 
 jobs:
   credo:
+    needs: verify
     name: credo advise
     runs-on: ubuntu-latest
     container:
