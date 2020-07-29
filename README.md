@@ -49,6 +49,10 @@ _Url Fetcher_ has some automated CI Github actions that will take care of review
 
 Once everything looks good, your PR will be merged. Every push to the main branch will trigger an automated publishing of the package and documentation to [hex](https://hex.pm).
 
+### Test coverage
+
+You can run a test coverage report with `mix coveralls`.
+
 ### Benchmarking
 
 In order to improve performance it is important to actually benchmark the code. _UrlFetcher_ uses [benchee](https://hex.pm/packages/benchee) for than. Have a look at [benchmark.exs](bin/benchmark.exs) and compare your implementation against the current code before submitting a pull request. Run the benchmark with `mix run bin/benchmark.exs <url>`.
