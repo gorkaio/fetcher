@@ -1,6 +1,7 @@
 # UrlFetcher
 
 ![Tests](https://github.com/gorkaio/url_fetcher/workflows/verify/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/gorkaio/url_fetcher/badge.svg?branch=master)](https://coveralls.io/github/gorkaio/url_fetcher?branch=master)
 
 _UrlFetcher_ fetches URLs present in image and anchor tags in a given URL.
 
